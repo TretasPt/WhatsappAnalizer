@@ -10,17 +10,20 @@ import sys
 import BaseWhatsapp
 
 
-print("Comandos disponiveis: ajuda, iniciar e sair.")
-print("Available commands: help, start and exit.")
+
 
 #Função que funciona como launcher/hub para tudo.
 def hub_start():
+
+    print("Comandos disponiveis: ajuda, iniciar e sair.")
+    print("Available commands: help, start and exit.")
+
     start = input()
     if start == "start" or start == "" or start== "RUN" or start== "Run" or start== "run" or start == "Start" or start == "iniciar" or start == "Iniciar" or start == "começar" or start == "Começar":
         print("A iniciar...")
         print("Starting...")
         print()
-        BaseWhatsapp.gotofile()
+        BaseWhatsapp.getfile()
     elif start == "help" or start == "Help" or start == "HELP" or start == "ajuda" or start == "Ajuda" or start == "AJUDA":
         print('Escreve um comando ("ajuda", "iniciar" ou "sair").')
         print("Atenção á capitalização.")
@@ -43,5 +46,8 @@ def end():
     print("Thank you for using my program.")
     sys.exit()
  
- 
-hub_start()
+def test():
+    print("Hello world. This still works!") 
+
+if __name__ == "__main__":
+    hub_start()

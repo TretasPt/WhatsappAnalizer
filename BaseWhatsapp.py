@@ -11,15 +11,7 @@ import sys
 import os.path
 import main
 
-
-def gotofile():
-    Speakers = []
-    SpeakerNumbers = []
-    SpeakerCharacters = []
-    SpeakerSpaces = []
-    AnomalyCount = 0
-    mensagens = 0
-
+def getfile():
     print('Cola o nome do fixeiro aqui (Inclui o ".txt").')
     print("Deixa em branco para usar o ficheiro default.")
     print()
@@ -34,9 +26,21 @@ def gotofile():
         print("Ficheiro não encontrado.")
         print("File not found.")
         print()
-        gotofile()
+        getfile()
+    analize(file)
+
+def analize(file):
+    filevar = file
+    Speakers = []
+    SpeakerNumbers = []
+    SpeakerCharacters = []
+    SpeakerSpaces = []
+    AnomalyCount = 0
+    mensagens = 0
+
     
-    myfile = open(file, "r" , encoding="UTF-8")
+    
+    myfile = open(filevar, "r" , encoding="UTF-8")
     while myfile:
         line  = myfile.readline()
         Anomalia = False
@@ -109,4 +113,4 @@ def gotofile():
         print(str(Speakers[y]) + "  Messages:" + str(SpeakerNumbers[y]) + "  Spaces:" + str(SpeakerSpaces[y]) + "  Characters:" + str(SpeakerCharacters[y]) + "  Words:" + str(SpeakerSpaces[y] + 1) + "  Words per message:" + str((SpeakerSpaces[y] + 1)/SpeakerNumbers[y]) + "  characters per word:" + str((SpeakerCharacters[y])/(SpeakerSpaces[y] + 1)))
         y += 1
         print()
-    main.start_function()
+    main.hub_start()
