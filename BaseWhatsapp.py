@@ -11,13 +11,17 @@ import sys
 import os.path
 import main
 
+
+#Pede o nome do ficheiro e caso não exista, avisa o utilizador. 
 def getfile():
     print('Cola o nome do fixeiro aqui (Inclui o ".txt").')
-    print("Deixa em branco para usar o ficheiro default.")
+    print("Deixa em branco para usar o ficheiro default." 'Escreve "sair" para sair.')
     print()
     print("Paste the file name here (don't forget the" + ' ".txt" extention).')
-    print("Leave it blanck to use the default file.")
+    print("Leave it blanck to use the default file." 'Write "quit" to exit.' )
     file = input()
+    if file == "quit" or file == "sair":
+        main.hub_start();
     if file == "":
         file = "Teste.txt"
     if file[-4:] != ".txt":
@@ -103,7 +107,13 @@ def analize(file):
     #print (SpeakerNumbers)
     #print (SpeakerSpaces)
     #print (SpeakerCharacters)
+
+    outputExperimental(Speakers,SpeakerNumbers,SpeakerSpaces,SpeakerCharacters)
+    # output(Speakers,SpeakerNumbers,SpeakerSpaces,SpeakerCharacters)
+
     
+
+def output(Speakers,SpeakerNumbers,SpeakerSpaces,SpeakerCharacters):
     print()
     print("Who: - Messages: - Spaces: - Characters: - Words: - Words per message: - words per character")
     print("\n")
@@ -113,4 +123,95 @@ def analize(file):
         print(str(Speakers[y]) + "  Messages:" + str(SpeakerNumbers[y]) + "  Spaces:" + str(SpeakerSpaces[y]) + "  Characters:" + str(SpeakerCharacters[y]) + "  Words:" + str(SpeakerSpaces[y] + 1) + "  Words per message:" + str((SpeakerSpaces[y] + 1)/SpeakerNumbers[y]) + "  characters per word:" + str((SpeakerCharacters[y])/(SpeakerSpaces[y] + 1)))
         y += 1
         print()
-    main.hub_start()
+    main.hub_start()    
+
+def howLong(string,max):
+    return max-len(str(string))
+
+
+
+def outputExperimental(Speakers,SpeakerNumbers,SpeakerSpaces,SpeakerCharacters):
+# from : "https://careerkarma.com/blog/python-typeerror-list-indices-must-be-integers-or-slices-not-str/"
+# for s in range(len(students)):
+# 	if students[s]["name"] == to_find:
+# 		print("The age of {} is {}.".format(students[s]["name"], students[s]["age"]))
+    columns =(Speakers,SpeakerNumbers,SpeakerSpaces,SpeakerCharacters)
+
+    print()
+    # # intervinients = len(Speakers)
+    # longSpeeker = len(Speakers[1])
+    # for i in Speakers:
+    #     if longSpeeker < len(Speakers[i]):
+    #         longSpeeker = len(Speakers[i])
+    # for i in Speakers:
+    #     print(Speakers[i] + ' '* howLong(Speakers[i],longSpeeker) + '|')
+
+
+
+    # longSpeeker = len(Speakers[1])
+    # for i in range(len(Speakers)):
+    #     if longSpeeker < len(Speakers[i]):
+    #         longSpeeker = len(Speakers[i])
+
+    
+    # for i in range(len(Speakers)):
+    #     print('-'* longSpeeker + '|')
+    #     #print(' '* longSpeeker + '|')
+    #     print(Speakers[i] + ' '* howLong(Speakers[i],longSpeeker) + '|')
+    #     print(' '* longSpeeker + '|')
+    #     print(' '* longSpeeker + '|')
+    #     #print('-'* longSpeeker + '|')
+    
+
+    # for j in range(len(columns)):
+    #     longElement = len(str(columns[j][0]))
+    #     for i in range(len(columns[j])):
+    #         if longElement < len(str(columns[j][i])):
+    #             longElement = len(str(columns[j][i]))
+
+        
+    #     for i in range(len(columns[j])):
+    #         print('-'* longElement + '|')
+    #         #print(' '* longElement + '|')
+    #         print(str(columns[j][i]) + ' '* howLong(columns[j][i],longElement) + '|')
+    #         print(' '* longElement + '|')
+    #         print(' '* longElement + '|')
+    #         #print('-'* longElement + '|')
+    longElement=[]
+    for j in range(len(columns)):
+        longElement.append(100)
+        longElement[j] = len(str(columns[j][0]))
+        for i in range(len(columns[j])):
+            if longElement[j] < len(str(columns[j][i])):
+                longElement[j] = len(str(columns[j][i]))
+    
+    
+    # print(longElement)#temp
+
+        
+    # for j in range(len(columns)):
+    #     for i in range(len(columns[j])):
+    #         print('-'* longElement[j] + '|')
+    #         #print(' '* longElement + '|')
+    #         print(str(columns[j][i]) + ' '* howLong(columns[j][i],longElement[j]) + '|')
+    #         print(' '* longElement[j] + '|')
+    #         print(' '* longElement[j] + '|')
+    #         #print('-'* longElement + '|')
+
+    for j in range(len(columns[0])):#LINE
+        # for k in range(4):
+        for i in range(len(columns)):#COLUMN
+            print('|' + '-'* longElement[i],end="")
+        print("|")
+        for i in range(len(columns)):#COLUMN
+            print('|' + str(columns[i][j]) + ' '* howLong(columns[i][j],longElement[i]),end="")
+        print("|")
+        for i in range(len(columns)):#COLUMN
+            print('|' + ' '* longElement[i],end="")
+        print("|")
+        for i in range(len(columns)):#COLUMN
+            print('|' + ' '* longElement[i],end="")
+        print("|")
+    for i in range(len(columns)):#COLUMN
+            print('|' + '-'* longElement[i],end="")
+    print("|")
