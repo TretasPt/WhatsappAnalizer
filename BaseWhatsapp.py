@@ -1,6 +1,6 @@
 #Programa que conta as mensagens de uma conversa de whatsapp de cada contacto.
 #(suporta apenas os ficheiros.txt atuais da exportação de conversas do whatsapp).
-#Versão 3.1.
+#Versão 4.1.
 
 
 #Necessário para o sys.exit()
@@ -11,13 +11,17 @@ import sys
 import os.path
 import main
 
+
+#Pede o nome do ficheiro e caso não exista, avisa o utilizador. 
 def getfile():
     print('Cola o nome do fixeiro aqui (Inclui o ".txt").')
-    print("Deixa em branco para usar o ficheiro default.")
+    print("Deixa em branco para usar o ficheiro default." 'Escreve "sair" para sair.')
     print()
     print("Paste the file name here (don't forget the" + ' ".txt" extention).')
-    print("Leave it blanck to use the default file.")
+    print("Leave it blanck to use the default file." 'Write "quit" to exit.' )
     file = input()
+    if file == "quit" or file == "sair":
+        main.hub_start();
     if file == "":
         file = "Teste.txt"
     if file[-4:] != ".txt":
@@ -98,19 +102,43 @@ def analize(file):
     print(str(mensagens-AnomalyCount) + " Mensages.")
     print(str(AnomalyCount) + "Anomalies.")
 
-    ##apenas usado para testes (troubleshooting)
-    #print (Speakers)
-    #print (SpeakerNumbers)
-    #print (SpeakerSpaces)
-    #print (SpeakerCharacters)
-    
+
+
+    columns =(Speakers,SpeakerNumbers,SpeakerSpaces,SpeakerCharacters)
+
+    longElement=[]
+    for j in range(len(columns)):
+        longElement.append(100)
+        longElement[j] = len(str(columns[j][0]))
+        for i in range(len(columns[j])):
+            if longElement[j] < len(str(columns[j][i])):
+                longElement[j] = len(str(columns[j][i]))
+
+    output(longElement,columns)
+   
+
+def howLong(string,max):
+    return max-len(str(string))
+
+
+def output(longElement,columns):
+ 
     print()
-    print("Who: - Messages: - Spaces: - Characters: - Words: - Words per message: - words per character")
-    print("\n")
-    lenght = len(Speakers)
-    y = 0
-    while y < lenght:
-        print(str(Speakers[y]) + "  Messages:" + str(SpeakerNumbers[y]) + "  Spaces:" + str(SpeakerSpaces[y]) + "  Characters:" + str(SpeakerCharacters[y]) + "  Words:" + str(SpeakerSpaces[y] + 1) + "  Words per message:" + str((SpeakerSpaces[y] + 1)/SpeakerNumbers[y]) + "  characters per word:" + str((SpeakerCharacters[y])/(SpeakerSpaces[y] + 1)))
-        y += 1
-        print()
-    main.hub_start()
+
+    for j in range(len(columns[0])):#LINE
+        # for k in range(4):
+        for i in range(len(columns)):#COLUMN
+            print('|' + '-'* longElement[i],end="")
+        print("|")
+        for i in range(len(columns)):#COLUMN
+            print('|' + str(columns[i][j]) + ' '* howLong(columns[i][j],longElement[i]),end="")
+        print("|")
+        for i in range(len(columns)):#COLUMN
+            print('|' + ' '* longElement[i],end="")
+        print("|")
+        for i in range(len(columns)):#COLUMN
+            print('|' + ' '* longElement[i],end="")
+        print("|")
+    for i in range(len(columns)):#COLUMN
+            print('|' + '-'* longElement[i],end="")
+    print("|")
