@@ -1,6 +1,6 @@
 #Programa que conta as mensagens de uma conversa de whatsapp de cada contacto.
 #(suporta apenas os ficheiros.txt atuais da exportação de conversas do whatsapp).
-#Versão 3.1.
+#Versão 4.1.
 
 
 #Necessário para o sys.exit()
@@ -102,81 +102,10 @@ def analize(file):
     print(str(mensagens-AnomalyCount) + " Mensages.")
     print(str(AnomalyCount) + "Anomalies.")
 
-    ##apenas usado para testes (troubleshooting)
-    #print (Speakers)
-    #print (SpeakerNumbers)
-    #print (SpeakerSpaces)
-    #print (SpeakerCharacters)
-
-    outputExperimental(Speakers,SpeakerNumbers,SpeakerSpaces,SpeakerCharacters)
-    # output(Speakers,SpeakerNumbers,SpeakerSpaces,SpeakerCharacters)
-
-    
-
-def output(Speakers,SpeakerNumbers,SpeakerSpaces,SpeakerCharacters):
-    print()
-    print("Who: - Messages: - Spaces: - Characters: - Words: - Words per message: - words per character")
-    print("\n")
-    lenght = len(Speakers)
-    y = 0
-    while y < lenght:
-        print(str(Speakers[y]) + "  Messages:" + str(SpeakerNumbers[y]) + "  Spaces:" + str(SpeakerSpaces[y]) + "  Characters:" + str(SpeakerCharacters[y]) + "  Words:" + str(SpeakerSpaces[y] + 1) + "  Words per message:" + str((SpeakerSpaces[y] + 1)/SpeakerNumbers[y]) + "  characters per word:" + str((SpeakerCharacters[y])/(SpeakerSpaces[y] + 1)))
-        y += 1
-        print()
-    main.hub_start()    
-
-def howLong(string,max):
-    return max-len(str(string))
 
 
-
-def outputExperimental(Speakers,SpeakerNumbers,SpeakerSpaces,SpeakerCharacters):
-# from : "https://careerkarma.com/blog/python-typeerror-list-indices-must-be-integers-or-slices-not-str/"
-# for s in range(len(students)):
-# 	if students[s]["name"] == to_find:
-# 		print("The age of {} is {}.".format(students[s]["name"], students[s]["age"]))
     columns =(Speakers,SpeakerNumbers,SpeakerSpaces,SpeakerCharacters)
 
-    print()
-    # # intervinients = len(Speakers)
-    # longSpeeker = len(Speakers[1])
-    # for i in Speakers:
-    #     if longSpeeker < len(Speakers[i]):
-    #         longSpeeker = len(Speakers[i])
-    # for i in Speakers:
-    #     print(Speakers[i] + ' '* howLong(Speakers[i],longSpeeker) + '|')
-
-
-
-    # longSpeeker = len(Speakers[1])
-    # for i in range(len(Speakers)):
-    #     if longSpeeker < len(Speakers[i]):
-    #         longSpeeker = len(Speakers[i])
-
-    
-    # for i in range(len(Speakers)):
-    #     print('-'* longSpeeker + '|')
-    #     #print(' '* longSpeeker + '|')
-    #     print(Speakers[i] + ' '* howLong(Speakers[i],longSpeeker) + '|')
-    #     print(' '* longSpeeker + '|')
-    #     print(' '* longSpeeker + '|')
-    #     #print('-'* longSpeeker + '|')
-    
-
-    # for j in range(len(columns)):
-    #     longElement = len(str(columns[j][0]))
-    #     for i in range(len(columns[j])):
-    #         if longElement < len(str(columns[j][i])):
-    #             longElement = len(str(columns[j][i]))
-
-        
-    #     for i in range(len(columns[j])):
-    #         print('-'* longElement + '|')
-    #         #print(' '* longElement + '|')
-    #         print(str(columns[j][i]) + ' '* howLong(columns[j][i],longElement) + '|')
-    #         print(' '* longElement + '|')
-    #         print(' '* longElement + '|')
-    #         #print('-'* longElement + '|')
     longElement=[]
     for j in range(len(columns)):
         longElement.append(100)
@@ -184,19 +113,17 @@ def outputExperimental(Speakers,SpeakerNumbers,SpeakerSpaces,SpeakerCharacters):
         for i in range(len(columns[j])):
             if longElement[j] < len(str(columns[j][i])):
                 longElement[j] = len(str(columns[j][i]))
-    
-    
-    # print(longElement)#temp
 
-        
-    # for j in range(len(columns)):
-    #     for i in range(len(columns[j])):
-    #         print('-'* longElement[j] + '|')
-    #         #print(' '* longElement + '|')
-    #         print(str(columns[j][i]) + ' '* howLong(columns[j][i],longElement[j]) + '|')
-    #         print(' '* longElement[j] + '|')
-    #         print(' '* longElement[j] + '|')
-    #         #print('-'* longElement + '|')
+    output(longElement,columns)
+   
+
+def howLong(string,max):
+    return max-len(str(string))
+
+
+def output(longElement,columns):
+ 
+    print()
 
     for j in range(len(columns[0])):#LINE
         # for k in range(4):
